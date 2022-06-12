@@ -5,14 +5,13 @@
 // スマートにswitch文重複を解消するinterface
 // interfaceを使わない場合
 class RectangleClass {
-  private width: number
-  private height: number
+  constructor(private width: number, private height: number) { }
   area(): number {
     return this.width * this.height
   }
 }
 class CircleClass {
-  private radius: number
+  constructor(private radius: number) { }
   area(): number {
     return this.radius * this.radius * Math.PI
   }
@@ -32,14 +31,13 @@ interface Shape {
   area(): number
 }
 class Rectangle implements Shape {
-  private width: number
-  private height: number
+  constructor(private width: number, private height: number) { }
   area(): number {
     return this.width * this.height
   }
 }
 class Circle implements Shape {
-  private radius: number
+  constructor(private radius: number) { }
   area(): number {
     return this.radius * this.radius * Math.PI
   }
@@ -49,7 +47,6 @@ const showArea = (shape: Shape): void => {
   console.log(shape.area())
 }
 
-const shape: Shape = new Rectangle()
 
 interface Magic {
   name(): string
@@ -58,9 +55,8 @@ interface Magic {
   costTechnicalPoint(): number
 }
 
-class Member {
-  level: number
-  agility: number
+export class Member {
+  constructor(public level: number, public agility: number) { }
 }
 
 class Fire implements Magic {
@@ -105,9 +101,10 @@ type MagicType = 'fire' | 'shiden'
 // Mapで条件分岐の代わりを果たす
 //interfaceを用いて処理を一斉に切り替える設計をストラテジパターンという
 // 未実装のメソッドをコンパイラが検知するので実装忘れを防ぐことができる
+const member = new Member(1, 1)
 let magics = new Map<MagicType, Magic>()
-magics.set('fire', new Fire(new Member()))
-magics.set('shiden', new Shiden(new Member()))
+magics.set('fire', new Fire(member))
+magics.set('shiden', new Shiden(member))
 
 const magicAttack = (magicType: MagicType): void => {
   const usingMagic: Magic | undefined = magics.get(magicType)

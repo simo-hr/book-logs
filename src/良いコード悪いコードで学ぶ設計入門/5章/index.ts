@@ -136,9 +136,8 @@ const recoverMagicPoint = (
 // ○魔法力に関係するロジックをカプセル化
 // 引数多すぎる問題を解消
 class MagicPoint {
-  private currentAmount: number
-  private originalMaxAmount: number
-  private maxIncrements: number[]
+  constructor(private currentAmount: number, private originalMaxAmount: number, private maxIncrements: number[]) {
+  }
 
   current(): number {
     return this.currentAmount
@@ -186,12 +185,16 @@ class Equipment {
   price: number
   defence: number
   magicDefence: number
+  constructor(armor: Armor) {
+    this.name = armor.name
+    this.price = armor.price
+    this.defence = armor.defence
+    this.magicDefence = armor.magicDefence
+  }
 }
 class Equipments {
-  private canChange: boolean
-  private head: Equipment
-  private armor: Equipment
-  private arm: Equipment
+  constructor(private canChange: boolean, private head: Equipment, private armor: Equipment, private arm: Equipment) {
+  }
 
   equipArmor(newArmor: Equipment): void {
     if (this.canChange) this.armor = newArmor

@@ -17,7 +17,7 @@
 type Currency = 'USD' | 'EUR' | 'JPY'
 
 // 値オブジェクト + 完全コンストラクタ
-class Money {
+export class Money {
   // 不変で思わぬ動作を防ぐ
   private readonly amount: number
   private readonly currency: Currency

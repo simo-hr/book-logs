@@ -67,7 +67,7 @@ class HitPoint {
 }
 
 type StateType = 'alive' | 'dead'
-class Member {
+export class Member {
   readonly hitPoint: HitPoint
   readonly states: StateType[]
 
